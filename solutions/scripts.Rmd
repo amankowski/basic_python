@@ -1,0 +1,83 @@
+---
+title: "python scripts"
+author: "Anna Mankowski"
+date: "15/03/2019"
+output: html_document
+---
+
+# Why scripts?
+
+```{bash, eval=FALSE}
+# This is my script for metagenomic processing
+
+trimming.sh < raw reads > filtered reads
+
+assembly.py < filtered reads > contigs
+
+sample_renaming.py < contigs > renamed contigs
+
+annotation < renamed contigs > annotations
+```
+
+# Example: change fasta headers
+
+```{bash}
+cat ../files/original_fasta.fasta
+```
+
+```{bash}
+cat ../files/sample_names.csv
+```
+
+## Which steps are needed?
+
+- read the input files 
+- find lines in fasta file starting with ">"
+  - find the sequence header in your renaming table
+  - write the corresponding new sequence header from the table into the outpout file
+- print lines that don't start with ">" to the output file
+
+### directly in python
+
+```{python echo=TRUE, engine.path="/miniconda3/bin/python3.7"}
+fastafile="../files/original_fasta.fasta"
+table="../files/sample_names.csv"
+fout="../files/renamed_fasta.fasta"
+
+with open(fastafile, 'r') as f:
+  fasta=f.readlines()
+  
+with open(table, 'r') as t:
+  headers=t.readlines()
+  
+with open(fout, 'w') as o:
+
+  for line in fasta:
+    if line[0] == '>':
+      for i in headers:
+        if i.split(',')[0] in line:
+          o.write(">" + i.split(',')[1])
+
+    else:
+      o.write(line)
+```
+
+```{bash}
+cat ../files/renamed_fasta.fasta
+```
+
+### in a python script that can be called from the command line 
+
+```{bash}
+../scripts/rename_fasta.py ../files/original_fasta.fasta ../files/sample_names.csv ../files/renamed_fasta_2.fasta
+
+cat ../files/renamed_fasta_2.fasta
+```
+
+### in a python script that takes command line flags
+
+```{bash}
+../scripts/rename_fasta_argparse.py --fasta ../files/original_fasta.fasta --samples ../files/sample_names.csv --output ../files/renamed_fasta_3.fasta 
+
+cat ../files/renamed_fasta_3.fasta
+```
