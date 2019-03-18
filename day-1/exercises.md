@@ -1,5 +1,6 @@
 * Tip: there is tab autocompletion in the python shell.  
 * In the python shell you can print by using the `print()` function. However, you can also print by just typing the variable or function etc. and press enter.
+* At some point (maybe not right now already) it might be helpful to have a cheat sheet, just google 'python cheat sheet'. There are many out there! 
 
 ### variables
 In the group introduction we stored values in 'cells' like so `A1 = 'some text'`. 
@@ -9,11 +10,11 @@ The `A1` in this example is called a variable. (A rather poorly named variable t
 1. make a new variable called `one_line_rhyme` and store this string of text in it:   
 `Though smaller than a dime oh bacteria are sublime`
 2. print this variable
-3. Make up a new microbiology-themed one-line-rhyme and store in under the `one_line_rhyme` variable. Does that work? What happened to the original string?
+3. Make up a new microbiology-themed one-line-rhyme and store as the `one_line_rhyme` variable. Does that work? What happened to the original string?
 
 
 ### strings
-There are many different types of objects in python. The variable `one_line_rhyme` stores a string. If you want to know what the type of an object is you can call the `type()` function. This function can sometimes come in handy if it is not obvious what you are working with.   
+There are many different types of objects in python. The variable `one_line_rhyme` stores a string object. If you want to know what the type of an object is you can call the `type()` function. This function can sometimes come in handy if it is not obvious what you are working with.   
 
 Strings are super useful and there are many things you can do with them. We won't go that deep here but feel free to google "python 3 string methods" to find out more.  
 Four tricks we will talk about here: 
@@ -59,9 +60,7 @@ Note that before print there is a tab indent.
 7. Now do that a million times. (tip: if you get bored, press *ctrl + c* to interrupt python)
 
 
-
-also introduce boolean logic
-### if statements, or "how big is your genome?"   
+### if statements and boolean logic, or "how big is your genome?"   
 Type the following into your terminal:
 ``` 
 e_coli = 4.6 
@@ -73,7 +72,11 @@ else:
 ```
 1. What is your output? 
 2. Type the same code, but change your genome size to 2.1. What is your output now? Why does that happen? 
-3. Can you write similar code 
+3. Can you write similar code but now use a `<` instead of a `>`?
+4. Just type `4 > 3` and `4 > 30`. What do you get? 
+5. The `>` is called a boolean comparison operator. The others are `==`, `!=`, `<=`, and `>=`. Try to use coding to figure out what they do. 
+6. Do these boolean operators work on strings as well? 
+
 
 
 
