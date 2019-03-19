@@ -20,7 +20,7 @@ Strings are super useful and there are many things you can do with them. We won'
 Four tricks we will talk about here: 
 * If you want to add two strings together simply do `'one string' + 'another string'`.     
 * If you want to figure out what the length of a string is use `len()`.  
-* slicing: `string[0: 4]` will make a new string with only the first four letters of the old string. `string[0]` will only print the first letter. Unlike humans, python starts counting at 0.
+* slicing: `string[0: 4]` will make a new string with only the first four letters of the old string. `string[0]` will only print the first letter. Unlike humans, python starts counting at 0. (The `string` here is a variable name)
 * `max()` gives the highest alphabetical letter in a string, `min()` the lowest alphabetical letter  
 
 ##### exercises
@@ -54,7 +54,7 @@ Note that before print there is a tab indent.
 1. What happens? 
 2. Can you change both instances of 'line' to a different word of choice? What happens? 
 3. Can you also print `'hear hear'` before every line? 
-4. Now try to make a loop using `for number in range(0:100):` where you print `'yeah'` and every number. 
+4. Now try to make a loop using `for number in range(0,100):` where you print `'yeah'` and every number. 
 5. Since your poem is so nice, can you print it 10,000 times (on separate lines)?  
 6. Print every letter of your poem on a new line. 
 7. Now do that a million times. (tip: if you get bored, press *ctrl + c* to interrupt python)
