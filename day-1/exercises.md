@@ -47,7 +47,8 @@ In the group introduction we talked about lists. A list is an object that stores
 It would be nice if we could print the second sentence of the poem on a new line. It so happens this is really easy! Please, try the following:
 ```
 for line in poem:
-    print(line)
+...    print(line)
+...
 ``` 
 Note that before print there is a tab indent. 
 ##### exercises
