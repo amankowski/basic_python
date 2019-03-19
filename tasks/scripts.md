@@ -1,10 +1,3 @@
----
-title: "python scripts"
-author: "Anna Mankowski"
-date: "15/03/2019"
-output: html_document
----
-
 # Why scripts?
 
 ```{bash, eval=FALSE}
