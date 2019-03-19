@@ -1,10 +1,3 @@
----
-title: "python functions"
-author: "Anna Mankowski"
-date: "14/03/2019"
-output: html_document
----
-
 # What is a function? 
 
 ```{python engine.path="/miniconda3/bin/python3.7"}
@@ -100,4 +93,3 @@ for i in range(0,5):
   gc.append(calc_gc(l[i], g[i]))
 print(gc)
 ```
-
