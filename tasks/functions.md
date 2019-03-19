@@ -1,10 +1,3 @@
----
-title: "python functions"
-author: "Anna Mankowski"
-date: "15/03/2019"
-output: html_document
----
-
 # What is a function? 
 
 ```{python engine.path="/miniconda3/bin/python3.7"}
@@ -31,6 +24,3 @@ G counts:         182, 328, 392, 101, 173
 **for loop**
 
 **with a self defined function**
-
-
-
