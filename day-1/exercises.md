@@ -35,7 +35,7 @@ Four tricks we will talk about here:
 ### lists
 In the group introduction we talked about lists. A list is an object that stores data, like so: `list_name = [2, 12, 2.22, 700000]`
 ##### exercises
-1. Create a new list called `poem` and store the `one_line_rhyme` and `another rhyme` there. 
+1. Create a new list called `poem` and store the `one_line_rhyme` and `another_rhyme` there. 
 2. Print the list, how does it look?  
 3. Try to print only the first item of the list. (tip: look at slicing in the strings section)
 4. Can you make a new list called `sizes` with the length of each line? How does it look?
