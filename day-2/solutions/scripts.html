@@ -118,7 +118,6 @@ summary {
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-
 .tabset-dropdown > .nav-tabs > li.active:before {
   content: "";
   font-family: 'Glyphicons Halflings';
@@ -126,12 +125,10 @@ summary {
   padding: 10px;
   border-right: 1px solid #ddd;
 }
-
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
   content: "";
   border: none;
 }
-
 .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
   content: "";
   font-family: 'Glyphicons Halflings';
@@ -139,11 +136,9 @@ summary {
   padding: 10px;
   border-right: 1px solid #ddd;
 }
-
 .tabset-dropdown > .nav-tabs > li.active {
   display: block;
 }
-
 .tabset-dropdown > .nav-tabs > li > a,
 .tabset-dropdown > .nav-tabs > li > a:focus,
 .tabset-dropdown > .nav-tabs > li > a:hover {
@@ -151,12 +146,10 @@ summary {
   display: inline-block;
   border-radius: 4px;
 }
-
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
   display: block;
   float: none;
 }
-
 .tabset-dropdown > .nav-tabs > li {
   display: none;
 }
@@ -166,7 +159,6 @@ summary {
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
-
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
     $(this).parent().toggleClass('nav-tabs-open')
@@ -230,71 +222,62 @@ annotation &lt; renamed contigs &gt; annotations</code></pre>
 </ul>
 <div id="directly-in-python" class="section level3">
 <h3>directly in python</h3>
-<pre class="python"><code>fastafile=&quot;../files/original_fasta.fasta&quot;
-table=&quot;../files/sample_names.csv&quot;
+<pre class="python"><code>import sys
+import csv
+
+fastafile=&quot;../files/original_fasta.fasta&quot;
+name_table=&quot;../files/sample_names.csv&quot;
 fout=&quot;../files/renamed_fasta.fasta&quot;
 
-with open(fastafile, 'r') as f:
-  fasta=f.readlines()
-  
-with open(table, 'r') as t:
-  headers=t.readlines()
-  
-with open(fout, 'w') as o:
+# save the names in the table as a dictionary:
+with open(name_table, 'r') as file:
+  reader = csv.reader(file)
+  names = {}
+  for row in reader:
+      old_name = row[0].strip()  # get rid of trailing spaces
+      new_name = row[1].strip()
+      names[old_name] = new_name
 
-  for line in fasta:
-    if line[0] == '&gt;':
-      for i in headers:
-        if i.split(',')[0] in line:
-          o.write(&quot;&gt;&quot; + i.split(',')[1])
 
+# now write the lines of the fasta file to a new file, where the headers
+# that are present in the names dictionary are renamed
+with open(fastafile, 'r') as fin, open(fout, 'w') as fout:
+  for line in fin:
+    if line[0] == '&gt;':  # there is a header
+        # if the name is in the names list, write new name. Otherwise write original header
+        header_name = line[1:].strip()  # remove '&gt;' and trailing spaces
+        if header_name in names:
+            fout.write(&quot;&gt;&quot; + names[header_name] + '\n')
+            print(f&quot;{header_name} was renamed to {names[header_name]}&quot;)
+        else:
+            fout.write(line)
     else:
-      o.write(line)</code></pre>
+      fout.write(line)</code></pre>
 <pre><code>## 14
+## Sample1 was renamed to CBC2017_2738
 ## 47
 ## 14
+## Sample2 was renamed to CBC2017_9248
 ## 47
 ## 14
+## Sample3 was renamed to CBC2017_1830
 ## 47
 ## 14
+## Sample4 was renamed to CBC2017_2810
 ## 46</code></pre>
 <pre class="bash"><code>cat ../files/renamed_fasta.fasta</code></pre>
-<pre><code>## &gt;CBC2017_2738
-## ACGCGTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCA
-## &gt;CBC2017_9248
-## TAGCTTCGCGATCGATCGATCGATCGATCGATCGATCGAGGAGAGC
-## &gt;CBC2017_1830
-## GAATGCGAGGCATGCATATTATTGCGGATCGATCGCGGGGAGCTAG
-## &gt;CBC2017_2810
-## CGATCAGCTAGGATAAACGATCGATCGATCGACTAGCTAGAGAGAA</code></pre>
 </div>
 <div id="in-a-python-script-that-can-be-called-from-the-command-line" class="section level3">
 <h3>in a python script that can be called from the command line</h3>
 <pre class="bash"><code>../scripts/rename_fasta.py ../files/original_fasta.fasta ../files/sample_names.csv ../files/renamed_fasta_2.fasta
 
 cat ../files/renamed_fasta_2.fasta</code></pre>
-<pre><code>## &gt;CBC2017_2738
-## ACGCGTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCA
-## &gt;CBC2017_9248
-## TAGCTTCGCGATCGATCGATCGATCGATCGATCGATCGAGGAGAGC
-## &gt;CBC2017_1830
-## GAATGCGAGGCATGCATATTATTGCGGATCGATCGCGGGGAGCTAG
-## &gt;CBC2017_2810
-## CGATCAGCTAGGATAAACGATCGATCGATCGACTAGCTAGAGAGAA</code></pre>
 </div>
 <div id="in-a-python-script-that-takes-command-line-flags" class="section level3">
 <h3>in a python script that takes command line flags</h3>
-<pre class="bash"><code>../scripts/rename_fasta_argparse.py --fasta ../files/original_fasta.fasta --samples ../files/sample_names.csv --output ../files/renamed_fasta_3.fasta 
+<pre class="bash"><code>../scripts/rename_fasta_argparse.py --fasta ../files/original_fasta.fasta --samples ../files/sample_names.csv --output ../files/renamed_fasta_3.fasta
 
 cat ../files/renamed_fasta_3.fasta</code></pre>
-<pre><code>## &gt;CBC2017_2738
-## ACGCGTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCA
-## &gt;CBC2017_9248
-## TAGCTTCGCGATCGATCGATCGATCGATCGATCGATCGAGGAGAGC
-## &gt;CBC2017_1830
-## GAATGCGAGGCATGCATATTATTGCGGATCGATCGCGGGGAGCTAG
-## &gt;CBC2017_2810
-## CGATCAGCTAGGATAAACGATCGATCGATCGACTAGCTAGAGAGAA</code></pre>
 </div>
 </div>
 </div>
@@ -305,7 +288,6 @@ cat ../files/renamed_fasta_3.fasta</code></pre>
 </div>
 
 <script>
-
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
@@ -313,8 +295,6 @@ function bootstrapStylePandocTables() {
 $(document).ready(function () {
   bootstrapStylePandocTables();
 });
-
-
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
