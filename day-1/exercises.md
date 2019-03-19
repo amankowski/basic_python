@@ -50,14 +50,18 @@ for line in poem:
 ...    print(line)
 ...
 ``` 
-Note that before print there is a tab indent. 
+! Note that before print there is a tab indent. 
+
 ##### exercises
 1. What happens? 
 2. Can you change both instances of 'line' to a different word of choice? What happens? 
-3. Can you also print `'hear hear'` before every line? 
-4. Now try to make a loop using `for number in range(0,100):` where you print `'yeah'` and every number. 
-5. Since your poem is so nice, can you print it 10,000 times (on separate lines)?  
-6. Print every letter of your poem on a new line. 
+3. Write the same code, but below the line `print(line)` type `print('I say')`. 
+4. Can you also print `'hear hear'` before every line? 
+5. Now try to make a loop using `for number in range(0,100):` where you print `'yeah'` and every number. 
+6. Since your poem is so nice, can you print it 10,000 times?
+7. Can you now print it 10,000 times on separate lines? (tip: you can nest loops)
+8. Type `for letter in 'this is some text':` (new line) `print(letter)`
+6. Try to print every letter of your poem on a new line. 
 7. Now do that a million times. (tip: if you get bored, press *ctrl + c* to interrupt python)
 
 
